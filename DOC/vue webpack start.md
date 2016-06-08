@@ -49,7 +49,7 @@ new Vue({
 ### 2.安裝 webpack, webpack-dev-server 與相關 loaders
 
 ```
-$ npm i webpack webpack-dev-server webpack-merge css-loader style-loader file-loader url-loader babel-core babel-loader babel-plugin-transform-runtime babel-preset-es2015 babel-preset-stage-0 babel-runtime vue-loader vue-html-loader vue-style-loader vue-hot-reload-api --save-dev
+$ npm i webpack webpack-dev-server webpack-merge css-loader style-loader file-loader url-loader babel-core babel-loader babel-plugin-transform-runtime babel-preset-es2015 babel-preset-stage-0 babel-runtime vue-loader vue-html-loader vue-style-loader vue-hot-reload-api vue --save-dev
 
 # -E 參數會定版，原本會是 ^1.0.0 -> 1.0.0
 # webpack: webapck 核心程式
@@ -71,6 +71,79 @@ $ npm i webpack webpack-dev-server webpack-merge css-loader style-loader file-lo
 # vue-hot-reload-api: Hot reload API for Vue components
 ```
 
+## webpack.config.js配置
 
+```
+var path = require('path')
+var webpack = require('webpack')
+var merge = require('webpack-merge')
+var T = process.env.npm_lifecycle_event
+
+var common = {
+  entry: {
+    main: path.join(__dirname, 'src', 'main'),
+    venders: path.join(__dirname, 'src', 'venders')
+  },
+  output: {
+    path: path.join(__dirname, 'dist'),
+    filename: '[name].bundle.js'
+  },
+  module: {
+    loaders: [
+      {
+        test: /\.js$/,
+        loader: 'babel',
+        exclude: /node_modules/
+      },
+      {
+        test: /\.vue$/,
+        loader: 'vue'
+      },
+      {
+        test: /\.css$/,
+        loaders: ['style', 'css']
+        /* include: path.join(__dirname, 'src') */
+      },
+      {
+        test: /\.scss$/,
+        loaders: ['style', 'css', 'sass']
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+        loader: 'url',
+        query: {
+          limit: 10000,
+          name: path.posix.join(__dirname, 'public', '[name].[hash:7].[ext]')
+        }
+      }
+    ]
+  },
+  resolve: {
+    extensions: ['', '.js', '.vue', '.json', '.scss', '.css']
+  },
+}
+
+if (T === 'dev' || !T) {
+  module.exports = merge(common, {
+    devServer: {
+      historyApiFallback: true,
+      hot: true,
+      inline: true,
+      progress: true,
+      stats: 'errors-only',
+      host: process.env.HOST || '0.0.0.0',
+      port: process.env.PORT
+    },
+    devtool: 'eval-source-map',
+    plugins: [
+      new webpack.HotModuleReplacementPlugin()
+    ]
+  })
+}
+
+if (T === 'build') {
+  module.exports = merge(common, {})
+}
+```
 
 + [原文链接](https://segmentfault.com/a/1190000005363030)
