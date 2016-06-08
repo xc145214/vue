@@ -43,6 +43,12 @@ ES6的支持
 npm install babel-loader babel-preset-es2015 --save-dev
 ```
 
+jshint 支持
+
+```
+npm install jshint-loader --save-dev
+```
+
 3.运行
 ```
 webpack
@@ -52,6 +58,7 @@ webpack
 ```
 npm start
 ```
+
 
 
 

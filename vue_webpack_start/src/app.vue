@@ -6,7 +6,7 @@
     export default{
         data(){
             return {
-                msg: 'Hello from vue-loader!'
+                msg: 'Hello from vue-loader! what are you doing?'
             }
         }
     }
@@ -14,6 +14,6 @@
 
 <style>
     .message{
-        color:blue;
+        color:red;
     }
 </style>

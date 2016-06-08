@@ -18,16 +18,35 @@ module.exports = {
         filename: 'bundle.js'
     },
 
+    //启用source-map 方便排错
+    devtool: 'eval-source-map',
+
     //devServer配置：
     devServer:{
         historyApiFallback:true,
         hot:true,
         inline:true,
-        process:true
+        process:true,
+        //配置端口
+        //proxy: {
+        //    '/api/*': {
+        //        target: 'http://localhost:5000',
+        //        secure: false
+        //    }
+        //}
+
     },
 
     //sass、css 等loader 处理顺序从右往左。
     module:{
+        //jsHint预处理
+        preLoaders: [
+            {
+                test: /\.jsx?$/,
+                include: APP_PATH,
+                loader: "jshint-loader"
+            }
+        ],
         loaders: [
             {
                 test: /\.scss$/,
@@ -39,6 +58,12 @@ module.exports = {
                 loader: 'url?limit=40000'// 图片大于40K会启动base64转码
             }
         ]
+    },
+
+    //custom jshint options
+    // any jshint option http://www.jshint.com/docs/options/
+    jshint: {
+        "esnext": true
     },
 
     //添加我们的插件 会自动生成一个html文件
