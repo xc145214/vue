@@ -1,5 +1,5 @@
 # vue + webpack
 
 
-[link](DOC/vue webpack start.md) vue + webpack 起手式
+1. [vue + webpack 起手式](DOC/vue webpack start.md)
 
