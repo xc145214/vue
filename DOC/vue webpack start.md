@@ -49,7 +49,7 @@ new Vue({
 ### 2.安裝 webpack, webpack-dev-server 與相關 loaders
 
 ```
-$ npm i webpack webpack-dev-server webpack-merge css-loader style-loader file-loader url-loader babel-core babel-loader babel-plugin-transform-runtime babel-preset-es2015 babel-preset-stage-0 babel-runtime vue-loader vue-html-loader vue-style-loader vue-hot-reload-api -D
+$ npm i webpack webpack-dev-server webpack-merge css-loader style-loader file-loader url-loader babel-core babel-loader babel-plugin-transform-runtime babel-preset-es2015 babel-preset-stage-0 babel-runtime vue-loader vue-html-loader vue-style-loader vue-hot-reload-api --save-dev
 
 # -E 參數會定版，原本會是 ^1.0.0 -> 1.0.0
 # webpack: webapck 核心程式
